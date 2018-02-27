@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2a952dfb-199c-4d9a-9e88-49acdd849c14" name="Default" comment="" />
+    <list default="true" id="2a952dfb-199c-4d9a-9e88-49acdd849c14" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -574,12 +576,12 @@
       <option name="presentableId" value="Default" />
       <updated>1519717738654</updated>
       <workItem from="1519717740251" duration="3404000" />
-      <workItem from="1519721204040" duration="897000" />
+      <workItem from="1519721204040" duration="1141000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4301000" />
+    <option name="totallyTimeSpent" value="4545000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1910" y="0" width="1940" height="2124" extended-state="0" />
