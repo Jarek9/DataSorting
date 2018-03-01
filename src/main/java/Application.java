@@ -4,6 +4,7 @@ public class Application {
         FileReader fileReader = new FileReader();
         try {
             fileReader.readFile();
+            fileReader.name();
         } catch (FileReaderException e) {
             System.out.println("Problem with reading file!!!");
         }
