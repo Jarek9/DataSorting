@@ -1,7 +1,6 @@
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -15,18 +14,21 @@ public class FileReader {
 
     public void readFile() throws FileReaderException {
 
-        ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(classLoader.getResource("file/names.txt").getFile());
-
-        Path path = Paths.get(file.getPath());
+        InputStream inputStream = null;
+        try {
+            inputStream = Files.newInputStream(Paths.get("src/main/resources/file/names.txt"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
         try {
-            Stream<String> fileLines = Files.lines(path);
+            Stream<String> fileLines = Files.lines(Paths.get("src/main/resources/file/names.txt"));
             System.out.println("Reading file:");
             fileLines.forEach(System.out::println);
             System.out.println("Formating data:");
 
-            fileLines = Files.lines(path);
+            fileLines = Files.lines(Paths.get("src/main/resources/file/names.txt"));
             String unformatedString = String.valueOf(fileLines.findAny());
             users = 0;
             int counter = 0;
