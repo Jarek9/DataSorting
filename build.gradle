@@ -1,4 +1,4 @@
-group 'com.AdditionalTasks'
+group 'com.additional-tasks'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'

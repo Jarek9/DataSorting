@@ -1,16 +1,16 @@
-import Core.FileReader;
-import ExceptionService.FileReaderException;
+import core.FileFormatter;
+import exceptionService.FileFormatterException;
 
 public class Application {
 
     public static void main(String args[]) {
-        FileReader fileReader = new FileReader();
+        FileFormatter fileFormatter = new FileFormatter();
         try {
-            fileReader.readFile();
-            fileReader.formatFile();
-            fileReader.findOldestUser();
-        } catch (FileReaderException e) {
-            System.out.println("Can't reade the file !");
+            fileFormatter.readFile();
+            fileFormatter.formatFile();
+            fileFormatter.findOldestUser();
+        } catch (FileFormatterException e) {
+            System.out.println("Can't read the file !");
         }
     }
 }

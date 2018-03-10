@@ -1,7 +1,7 @@
-package Core;
+package core;
 
-import ExceptionService.FileReaderException;
-import User.User;
+import exceptionService.FileFormatterException;
+import user.User;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class FileReader {
+public class FileFormatter {
     private String firstName;
     private String lastName;
     private LocalDate birthDate;
@@ -24,41 +24,47 @@ public class FileReader {
     private String oldestUser;
     private long age;
     private String splited;
+    private static final int FIRST_ELEMENT = 1;
+    private static final int SECOND_ELEMENT = 2;
+    private static final int THIRD_ELEMENT = 3;
+    private static final int FOURTH_ELEMENT = 4;
+    private static final int START = 0;
+    private static final String FILE_PATH = "src/main/resources/file/names.txt";
 
-    Set<User> usersList = new HashSet<>();
+    private Set<User> usersList = new HashSet<>();
 
-    public void readFile() throws FileReaderException {
-        try {
-            InputStream inputStream = Files.newInputStream(Paths.get("src/main/resources/file/names.txt"));
+    public void readFile() throws FileFormatterException {
+        try (InputStream inputStream = Files.newInputStream(Paths.get(FILE_PATH))){
+
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             System.out.println("Reading file:" + reader.readLine());
         } catch (IOException e) {
-            throw new FileReaderException();
+            throw new FileFormatterException();
         }
     }
 
-    public void formatFile() throws FileReaderException {
+    public void formatFile() throws FileFormatterException {
         System.out.println("Formating data:");
-        try {
-            InputStream inputStream = Files.newInputStream(Paths.get("src/main/resources/file/names.txt"));
+        try (InputStream inputStream = Files.newInputStream(Paths.get(FILE_PATH))){
+
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             splited = reader.readLine();
         } catch (IOException e) {
-            throw new FileReaderException();
+            throw new FileFormatterException();
         }
         String[] splitedArray;
         splitedArray = splited.split(",");
         for (int i = 0; i < splitedArray.length; i++) {
             counter++;
-            if (counter == 1) {
-                firstName = splitedArray[i].substring(splitedArray[i].indexOf("[") + 1);
-            } else if (counter == 2) {
+            if (counter == FIRST_ELEMENT) {
+                firstName = splitedArray[i].substring(splitedArray[i].indexOf("[") + FIRST_ELEMENT);
+            } else if (counter == SECOND_ELEMENT) {
                 lastName = splitedArray[i];
-            } else if (counter == 3) {
+            } else if (counter == THIRD_ELEMENT) {
                 birthDate = LocalDate.parse(splitedArray[i]);
-            } else if (counter == 4) {
+            } else if (counter == FOURTH_ELEMENT) {
                 phone = Integer.parseInt(splitedArray[i]);
-                counter = 0;
+                counter = START;
                 usersQuantity++;
                 User user = new User(firstName, lastName, birthDate, phone);
                 usersList.add(user);
@@ -67,15 +73,16 @@ public class FileReader {
                         + " " + user.getPhone());
             }
         }
-        System.out.println("\nList contains " + usersQuantity + " users.");
+        System.out.println("\nThe list contains " + usersQuantity + " users.");
     }
 
     public void findOldestUser() {
         List<User> sortedList = usersList.stream().sorted(Comparator.comparing(User::getBirthDate)).collect(Collectors.toList());
-        age = (currentDate.toEpochDay() - sortedList.get(0).getBirthDate().toEpochDay())/ 365;
-        oldestUser = (sortedList.get(0).getFirstname() + " " + sortedList.get(0).getLastName() + " " + age
-                + " years old" + " " + sortedList.get(0).getPhone());
+        age = currentDate.getYear() - sortedList.get(START).getBirthDate().getYear();
+        oldestUser = (sortedList.get(START).getFirstname() + " " + sortedList.get(0).getLastName() + " " + age
+                + " years old" + " " + sortedList.get(START).getPhone());
         System.out.println("\nThe oldest user on list is " + oldestUser);
     }
+
 }
 
