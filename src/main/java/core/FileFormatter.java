@@ -66,15 +66,20 @@ public class FileFormatter {
                 phone = Integer.parseInt(splitedArray[i]);
                 counter = START;
                 usersQuantity++;
-                User user = new User(firstName, lastName, birthDate, phone);
-                usersList.add(user);
-                System.out.println(usersQuantity + ". " + user.getFirstname() + " " + user.getLastName()
-                        + " " + user.getBirthDate()
-                        + " " + user.getPhone());
+                createUsersList();
             }
         }
         System.out.println("\nThe list contains " + usersQuantity + " users.");
     }
+
+    public void createUsersList() {
+        User user = new User(firstName, lastName, birthDate, phone);
+        usersList.add(user);
+        System.out.println(usersQuantity + ". " + user.getFirstname() + " " + user.getLastName()
+                + " " + user.getBirthDate()
+                + " " + user.getPhone());
+    }
+
 
     public void findOldestUser() {
         List<User> sortedList = usersList.stream().sorted(Comparator.comparing(User::getBirthDate)).collect(Collectors.toList());
