@@ -84,7 +84,7 @@ public class FileFormatter {
     public void findOldestUser() {
         List<User> sortedList = usersList.stream().sorted(Comparator.comparing(User::getBirthDate)).collect(Collectors.toList());
         age = currentDate.getYear() - sortedList.get(START).getBirthDate().getYear();
-        oldestUser = (sortedList.get(START).getFirstname() + " " + sortedList.get(0).getLastName() + " " + age
+        oldestUser = (sortedList.get(START).getFirstname() + " " + sortedList.get(START).getLastName() + " " + age
                 + " years old" + " " + sortedList.get(START).getPhone());
         System.out.println("\nThe oldest user on list is " + oldestUser);
     }
